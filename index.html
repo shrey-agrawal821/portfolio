@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shrey Agrawal · Product & Fullstack</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f6f3ff;
+            color: #0b1a33;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* -------- GLASS HEADER with multi-color accent -------- */
+        header {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid transparent;
+            border-image: linear-gradient(90deg, #7c3aed, #f59e0b, #ec4899, #3b82f6) 1;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .logo {
+            font-size: 1.9rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #7c3aed, #ec4899, #f59e0b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '◆';
+            font-size: 0.5rem;
+            margin-left: 4px;
+            background: linear-gradient(135deg, #7c3aed, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.2rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #1f2a44;
+            transition: 0.3s;
+            font-size: 0.95rem;
+            position: relative;
+            letter-spacing: 0.2px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2.5px;
+            background: linear-gradient(90deg, #7c3aed, #ec4899, #f59e0b);
+            border-radius: 4px;
+            transition: width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #7c3aed;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #7c3aed, #6d28d9);
+            color: white;
+            font-weight: 600;
+            padding: 0.65rem 2rem;
+            border-radius: 60px;
+            text-decoration: none;
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+            box-shadow: 0 8px 24px -6px rgba(124, 58, 237, 0.35);
+            letter-spacing: 0.2px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 16px 36px -10px rgba(124, 58, 237, 0.45);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid #7c3aed;
+            color: #7c3aed;
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: #7c3aed;
+            color: white;
+            box-shadow: 0 8px 24px -6px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn-pink {
+            background: linear-gradient(135deg, #ec4899, #db2777);
+            box-shadow: 0 8px 24px -6px rgba(236, 72, 153, 0.35);
+        }
+
+        .btn-pink:hover {
+            box-shadow: 0 16px 36px -10px rgba(236, 72, 153, 0.45);
+        }
+
+        .btn-amber {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            box-shadow: 0 8px 24px -6px rgba(245, 158, 11, 0.35);
+        }
+
+        .btn-amber:hover {
+            box-shadow: 0 16px 36px -10px rgba(245, 158, 11, 0.45);
+        }
+
+        /* -------- HERO with multi-color blob -------- */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 3rem;
+            padding: 3.5rem 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle at 30% 40%, rgba(124, 58, 237, 0.06), rgba(236, 72, 153, 0.04), rgba(245, 158, 11, 0.02));
+            border-radius: 50%;
+            top: -200px;
+            right: -100px;
+            z-index: 0;
+            animation: blobFloat 22s ease-in-out infinite alternate;
+        }
+
+        .hero-blob-2 {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle at 70% 60%, rgba(59, 130, 246, 0.05), rgba(236, 72, 153, 0.03));
+            border-radius: 50%;
+            bottom: -80px;
+            left: -60px;
+            z-index: 0;
+            animation: blobFloat 26s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes blobFloat {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(40px, 30px) scale(1.1);
+            }
+        }
+
+        .hero-content {
+            flex: 1.3;
+            position: relative;
+            z-index: 2;
+        }
+
+        .badge {
+            background: rgba(124, 58, 237, 0.08);
+            backdrop-filter: blur(4px);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.35rem 1.5rem 0.35rem 1.2rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: #7c3aed;
+            margin-bottom: 1.2rem;
+            border: 1px solid rgba(124, 58, 237, 0.08);
+        }
+
+        .badge i {
+            font-size: 0.7rem;
+            color: #ec4899;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -0.035em;
+            line-height: 1.12;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #7c3aed, #ec4899, #f59e0b);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            color: #2a3a5e;
+            max-width: 90%;
+            margin: 1.2rem 0 1.8rem;
+            opacity: 0.8;
+            line-height: 1.7;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin: 1.8rem 0;
+        }
+
+        .stat-item {
+            font-weight: 600;
+            color: #1f2a44;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-item span {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #7c3aed, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .stat-item small {
+            font-weight: 400;
+            font-size: 0.85rem;
+            color: #5b6d8f;
+            margin-top: 2px;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .avatar-glow {
+            position: absolute;
+            inset: -12px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #7c3aed, #ec4899, #f59e0b, #3b82f6, #7c3aed);
+            opacity: 0.2;
+            z-index: 0;
+            animation: spin 14s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #7c3aed, #6d28d9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: white;
+            margin: 0 auto;
+            box-shadow: 0 30px 50px -18px rgba(124, 58, 237, 0.3);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            z-index: 2;
+            letter-spacing: 2px;
+            overflow: hidden;
+        }
+
+        .avatar:hover {
+            transform: scale(1.04) rotate(-2deg);
+        }
+
+        .hero-image .location {
+            margin-top: 1.2rem;
+            font-weight: 500;
+            color: #1f2a44;
+            font-size: 0.95rem;
+        }
+
+        .hero-image .location i {
+            background: linear-gradient(135deg, #7c3aed, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-right: 6px;
+        }
+
+        .hero-image .email {
+            font-size: 0.9rem;
+            color: #5b6d8f;
+            margin-top: 2px;
+        }
+
+        /* -------- section titles with multi-color -------- */
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 3rem 0 1.8rem;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title i {
+            font-size: 1.6rem;
+            background: linear-gradient(135deg, #7c3aed, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0.6;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #7c3aed, #ec4899, #f59e0b);
+            border-radius: 4px;
+        }
+
+        /* -------- cards with multi-color accents -------- */
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 2.2rem;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 6px 28px rgba(0, 0, 0, 0.02);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:nth-child(1) .card-icon {
+            color: #7c3aed;
+        }
+
+        .card:nth-child(2) .card-icon {
+            color: #ec4899;
+        }
+
+        .card:nth-child(3) .card-icon {
+            color: #f59e0b;
+        }
+
+        .card:nth-child(4) .card-icon {
+            color: #3b82f6;
+        }
+
+        .card:nth-child(5) .card-icon {
+            color: #8b5cf6;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 2.2rem;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(236, 72, 153, 0.08), rgba(245, 158, 11, 0.08));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.01);
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(124, 58, 237, 0.12);
+            box-shadow: 0 24px 56px -20px rgba(124, 58, 237, 0.15);
+        }
+
+        .card .card-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            opacity: 0.5;
+        }
+
+        .card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.2rem;
+            color: #0b1a33;
+            font-weight: 700;
+        }
+
+        .card .meta {
+            font-size: 0.8rem;
+            color: #5b6d8f;
+            margin-bottom: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+        }
+
+        .card p {
+            color: #2a3a5e;
+            margin-bottom: 1.2rem;
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+
+        .skill-badge {
+            display: inline-block;
+            background: rgba(124, 58, 237, 0.06);
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #7c3aed;
+            margin: 0.2rem 0.2rem 0 0;
+            border: 1px solid rgba(124, 58, 237, 0.06);
+            transition: 0.2s;
+        }
+
+        .skill-badge:hover {
+            background: rgba(124, 58, 237, 0.1);
+        }
+
+        .card .link-group {
+            margin-top: 1.2rem;
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .card .link-group a {
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: 0.25s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border-bottom: 1.5px solid transparent;
+            padding-bottom: 2px;
+        }
+
+        .card:nth-child(1) .link-group a {
+            color: #7c3aed;
+        }
+
+        .card:nth-child(1) .link-group a:hover {
+            border-bottom-color: #7c3aed;
+        }
+
+        .card:nth-child(2) .link-group a {
+            color: #ec4899;
+        }
+
+        .card:nth-child(2) .link-group a:hover {
+            border-bottom-color: #ec4899;
+        }
+
+        .card:nth-child(3) .link-group a {
+            color: #f59e0b;
+        }
+
+        .card:nth-child(3) .link-group a:hover {
+            border-bottom-color: #f59e0b;
+        }
+
+        .card:nth-child(4) .link-group a {
+            color: #3b82f6;
+        }
+
+        .card:nth-child(4) .link-group a:hover {
+            border-bottom-color: #3b82f6;
+        }
+
+        .card:nth-child(5) .link-group a {
+            color: #8b5cf6;
+        }
+
+        .card:nth-child(5) .link-group a:hover {
+            border-bottom-color: #8b5cf6;
+        }
+
+        /* -------- skills with multi-color tags -------- */
+        .skills-glass {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 2.5rem;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 6px 28px rgba(0, 0, 0, 0.02);
+            margin-bottom: 2rem;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+        }
+
+        .skills-grid .skill-badge {
+            padding: 0.45rem 1.4rem;
+            font-size: 0.8rem;
+            border-radius: 60px;
+            font-weight: 500;
+            border: 1px solid rgba(124, 58, 237, 0.04);
+        }
+
+        .skills-grid .skill-badge:nth-child(3n+1) {
+            background: rgba(124, 58, 237, 0.06);
+            color: #7c3aed;
+        }
+
+        .skills-grid .skill-badge:nth-child(3n+2) {
+            background: rgba(236, 72, 153, 0.06);
+            color: #db2777;
+        }
+
+        .skills-grid .skill-badge:nth-child(3n+3) {
+            background: rgba(245, 158, 11, 0.06);
+            color: #d97706;
+        }
+
+        .skills-grid .skill-badge:nth-child(5n+4) {
+            background: rgba(59, 130, 246, 0.06);
+            color: #2563eb;
+        }
+
+        .skills-grid .skill-badge i {
+            margin-right: 6px;
+            opacity: 0.5;
+            font-size: 0.7rem;
+        }
+
+        .cert-row {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(124, 58, 237, 0.05);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .cert-row strong {
+            background: linear-gradient(135deg, #7c3aed, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cert-tag {
+            background: rgba(124, 58, 237, 0.04);
+            padding: 0.2rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            color: #1f2a44;
+            border: 1px solid rgba(124, 58, 237, 0.04);
+        }
+
+        /* -------- contact with multi-color gradient border -------- */
+        .contact-block {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 2.8rem;
+            padding: 2.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            margin: 2.5rem 0;
+            position: relative;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.02);
+        }
+
+        .contact-block::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 2.8rem;
+            padding: 2px;
+            background: linear-gradient(135deg, #7c3aed, #ec4899, #f59e0b, #3b82f6);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .contact-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0b1a33;
+        }
+
+        .contact-header i {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #7c3aed, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0.3;
+        }
+
+        .contact-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem 3rem;
+            margin: 1.5rem 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #1f2a44;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: 0.2s;
+        }
+
+        .contact-item i {
+            width: 2.4rem;
+            height: 2.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 1rem;
+            flex-shrink: 0;
+            transition: 0.3s;
+        }
+
+        .contact-item:nth-child(1) i {
+            background: rgba(124, 58, 237, 0.08);
+            color: #7c3aed;
+        }
+
+        .contact-item:nth-child(2) i {
+            background: rgba(236, 72, 153, 0.08);
+            color: #ec4899;
+        }
+
+        .contact-item:nth-child(3) i {
+            background: rgba(245, 158, 11, 0.08);
+            color: #f59e0b;
+        }
+
+        .contact-item:nth-child(4) i {
+            background: rgba(59, 130, 246, 0.08);
+            color: #3b82f6;
+        }
+
+        .contact-item:hover i {
+            transform: scale(1.08);
+        }
+
+        .contact-item:hover {
+            color: #7c3aed;
+        }
+
+        .contact-divider {
+            border: none;
+            border-top: 1px solid rgba(124, 58, 237, 0.05);
+            margin: 1.5rem 0;
+        }
+
+        .contact-bottom {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .contact-bottom .label {
+            font-weight: 600;
+            color: #1f2a44;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-bottom .label i {
+            background: linear-gradient(135deg, #7c3aed, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0.5;
+        }
+
+        /* -------- footer with multi-color -------- */
+        footer {
+            text-align: center;
+            padding: 2.5rem 0 1.8rem;
+            border-top: 1px solid rgba(124, 58, 237, 0.04);
+            color: #5b6d8f;
+            margin-top: 2rem;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        footer .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 0.8rem;
+        }
+
+        footer .social-links a {
+            transition: 0.3s;
+            font-size: 1.2rem;
+            opacity: 0.5;
+        }
+
+        footer .social-links a:nth-child(1) {
+            color: #7c3aed;
+        }
+
+        footer .social-links a:nth-child(2) {
+            color: #ec4899;
+        }
+
+        footer .social-links a:nth-child(3) {
+            color: #f59e0b;
+        }
+
+        footer .social-links a:nth-child(4) {
+            color: #3b82f6;
+        }
+
+        footer .social-links a:hover {
+            opacity: 1;
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        /* -------- responsive -------- */
+        @media (max-width: 780px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 1.5rem;
+            }
+
+            .hero-content p {
+                max-width: 100%;
+            }
+
+            .hero-stats {
+                justify-content: center;
+                gap: 1.8rem;
+            }
+
+            .section-title {
+                display: flex;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .section-title:after {
+                left: 50%;
+                transform: translateX(-50%);
+                width: 80px;
+            }
+
+            .nav-links {
+                gap: 1.2rem;
+                justify-content: center;
+            }
+
+            .logo {
+                font-size: 1.6rem;
+            }
+
+            .contact-header {
+                justify-content: center;
+            }
+
+            .contact-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1.2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.4rem;
+            }
+
+            .avatar {
+                width: 160px;
+                height: 160px;
+                font-size: 3.6rem;
+            }
+
+            .contact-block {
+                padding: 1.8rem;
+            }
+
+            .skills-glass {
+                padding: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Shrey Agrawal</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <a href="#contact" class="btn">Resume ↓</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="home">
+        <div class="container hero">
+            <div class="hero-blob"></div>
+            <div class="hero-blob-2"></div>
+
+            <div class="hero-content">
+                <div class="badge"><i class="fas fa-bolt"></i> Open for placements & internships '26</div>
+                <h1>Building products that <span class="highlight">deliver impact</span></h1>
+                <p>Final-year ECE student · Full-Stack Web Developer · React.js & JavaScript Enthusiast · Aspiring
+                    Software Engineer.</p>
+                <div class="hero-stats">
+                    <!-- Stats removed as requested -->
+                </div>
+                <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:0.5rem;">
+                    <a href="#projects" class="btn">View Work <i class="fas fa-arrow-right"
+                            style="margin-left:8px;"></i></a>
+                    <a href="#contact" class="btn btn-outline">Contact</a>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <div class="avatar-wrapper">
+                    <div class="avatar-glow"></div>
+                    <div class="avatar">
+                        <img src="Shrey Agrawal.png" alt="Shrey Agrawal"
+                            style="width:100%; height:100%; border-radius:50%; object-fit:cover;">
+                    </div>
+                </div>
+                <div class="location"><i class="fas fa-map-pin"></i> Kanpur, IN</div>
+                <div class="email">shreyagrawal821@gmail.com</div>
+            </div>
+        </div>
+
+        <!-- Projects -->
+        <div class="container" id="projects">
+            <h2 class="section-title"><i class="fas fa-code"></i> Featured Projects</h2>
+            <div class="grid-2col">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-robot"></i></div>
+                    <h4>Obstacle Avoiding Car</h4>
+                    <div class="meta">Arduino · Ultrasonic Sensor · L298N Motor Driver · Embedded C</div>
+                    <p>
+                        Built an autonomous robotic car capable of detecting and avoiding obstacles
+                        using an ultrasonic sensor. The system continuously measures the distance
+                        to nearby objects and automatically changes direction to navigate safely
+                        without human intervention.
+                    </p>
+                    <div>
+                        <span class="skill-badge">Arduino</span>
+                        <span class="skill-badge">Embedded C</span>
+                        <span class="skill-badge">Ultrasonic Sensor</span>
+                        <span class="skill-badge">L298N</span>
+                    </div>
+                    <div class="link-group">
+                        
+                        <a href="https://github.com/shrey-agrawal821/Obstacles-Avoiding-Car-"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-hand-paper"></i></div>
+                    <h4>Hand Motion Control Car</h4>
+                    <div class="meta">Arduino · Accelerometer · RF Module · Embedded C</div>
+                    <p>
+                        Designed and developed a gesture-controlled robotic car using an Arduino,
+                        accelerometer sensor, RF communication module, and motor driver. The car
+                        moves in real time based on hand gestures, demonstrating wireless embedded
+                        system control.
+                    </p>
+                    <div>
+                        <span class="skill-badge">Arduino</span>
+                        <span class="skill-badge">Embedded C</span>
+                        <span class="skill-badge">RF Module</span>
+                        <span class="skill-badge">Accelerometer</span>
+                    </div>
+                    <div class="link-group">
+                        
+                        <a href="https://github.com/shrey-agrawal821/Hand-Motion-Control-Car"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-font"></i></div>
+                    <h4>TextUtils</h4>
+                    <div class="meta">React.js · Bootstrap · JavaScript</div>
+                    <p>A text utility web application that performs text transformations such as case conversion, word
+                        and character counting, text preview, copy to clipboard, and dark/light mode support.</p>
+                    <div>
+                        <span class="skill-badge">React</span>
+                        <span class="skill-badge">Bootstrap</span>
+                        <span class="skill-badge">JavaScript</span>
+                    </div>
+                    <div class="link-group">
+                        <a href="https://text-utils-coral-one.vercel.app/"><i class="fas fa-globe"></i> Live Demo</a>
+                        <a href="https://github.com/shrey-agrawal821/TextUtils"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-newspaper"></i></div>
+                    <h4>News App</h4>
+                    <div class="meta">React.js · News API · Bootstrap</div>
+                    <p>A responsive news application that fetches the latest headlines using News API. Users can browse
+                        news by category with a clean and mobile-friendly interface.</p>
+                    <div>
+                        <span class="skill-badge">React</span>
+                        <span class="skill-badge">REST API</span>
+                        <span class="skill-badge">Bootstrap</span>
+                    </div>
+                    <div class="link-group">
+                        <a href="YOUR_LIVE_LINK"><i class="fas fa-globe"></i> Live Demo</a>
+                        <a href="https://github.com/shrey-agrawal821/News-app"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h4>Responsive Website Interface</h4>
+                    <div class="meta">HTML · CSS · JavaScript</div>
+                    <p>A modern and fully responsive website interface featuring attractive UI components, smooth
+                        navigation, animations, and mobile-first design principles.</p>
+                    <div>
+                        <span class="skill-badge">HTML5</span>
+                        <span class="skill-badge">CSS3</span>
+                        <span class="skill-badge">JavaScript</span>
+                    </div>
+                    <div class="link-group">
+                        <a href="https://a-responsive-website-interface.vercel.app/"><i class="fas fa-globe"></i> Live Demo</a>
+                        <a href="https://github.com/shrey-agrawal821/A-responsive-website-interface"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills -->
+        <div class="container" id="skills">
+            <h2 class="section-title"><i class="fas fa-cog"></i> Tech Arsenal</h2>
+            <div class="skills-glass">
+                <div class="skills-grid">
+                    <span class="skill-badge"><i class="fab fa-js"></i> JavaScript/TypeScript</span>
+                    <span class="skill-badge"><i class="fab fa-react"></i> React/Next.js</span>
+                    <span class="skill-badge"><i class="fab fa-node-js"></i> Node.js/Express</span>
+                    <span class="skill-badge"><i class="fas fa-database"></i> MongoDB</span>
+                    <span class="skill-badge"><i class="fas fa-database"></i> HTML/CSS</span>
+                    <span class="skill-badge"><i class="fas fa-box"></i> Docker</span>
+                    <span class="skill-badge"><i class="fas fa-microchip"></i> 8085 Microprocessor</span>
+                    <span class="skill-badge"><i class="fas fa-square-root-alt"></i> MATLAB</span>
+                    <span class="skill-badge"><i class="fas fa-microchip"></i> Arduino</span>
+                    <span class="skill-badge"><i class="fas fa-cloud"></i> AWS (EC2,S3)</span>
+                    <span class="skill-badge"><i class="fas fa-pen-fancy"></i> Figma</span>
+                    <span class="skill-badge"><i class="fab fa-git-alt"></i> Git/GitHub Actions</span>
+                    <span class="skill-badge"><i class="fab fa-python"></i> Python</span>
+                    <span class="skill-badge"><i class="fas fa-bolt"></i> FastAPI</span>
+                    <span class="skill-badge"><i class="fab fa-react"></i> React Native</span>
+                </div>
+
+                <div class="cert-row">
+                    <strong><i class="fas fa-certificate"></i> Certifications</strong>
+                    <span class="cert-tag">Hackerrank Python (Basic)</span>
+                    <span class="cert-tag">Infosys springboard HTML</span>
+                    <span class="cert-tag">Infosys springboard CSS </span>
+                    <span class="cert-tag">TCS ion Generative AI Essentials </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact -->
+        <div class="container" id="contact">
+            <div class="contact-block">
+                <div class="contact-header">
+                    <i class="fas fa-paper-plane"></i>
+                    <h2>Let's connect</h2>
+                </div>
+                <p style="color:#2a3a5e; margin:0.3rem 0 1.2rem; opacity:0.7;">Available for placements,
+                    internships,
+                    and product collaborations.</p>
+
+                <div class="contact-row">
+                    <div class="contact-item"><i class="fas fa-envelope"></i> shreyagrawal821@gmail.com</div>
+                    <div class="contact-item"><i class="fab fa-linkedin"></i> linkedin.com/in/shreyagrawal</div>
+                    <div class="contact-item"><i class="fab fa-github"></i> github.com/shrey-dev</div>
+                    <div class="contact-item"><i class="fas fa-phone-alt"></i> +91 80527 10298</div>
+                </div>
+
+                <hr class="contact-divider" />
+
+                <div class="contact-bottom">
+                    <span class="label"><i class="fas fa-file-pdf"></i> Resume & Portfolio Pack</span>
+                    <div style="display:flex; gap:0.8rem; flex-wrap:wrap;">
+                        <a href="Shrey agrawal.pdf" download class="btn">
+                            <i class="fas fa-download" style="margin-right:8px;"></i>Download CV
+                        </a>
+                        <a href="https://shrey-dev.github.io/Portfolio/" target="_blank"
+                            class="btn btn-pink">View Portfolio</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Shrey Agrawal — Built for placements & career opportunities.</p>
+            <div class="social-links">
+                <a href="https://github.com/shrey-dev"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/shreyagrawal" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:shreyagrawal821@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- smooth scroll -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
